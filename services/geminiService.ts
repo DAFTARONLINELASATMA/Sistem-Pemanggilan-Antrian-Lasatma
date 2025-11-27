@@ -1,8 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
 
-const apiKey = process.env.API_KEY || '';
-const ai = new GoogleGenAI({ apiKey });
-
 const LAPAS_SYSTEM_INSTRUCTION = `
 Anda adalah Asisten Virtual Resmi untuk Lapas Kelas I Madiun. Tugas anda adalah membantu pengunjung dengan informasi sopan dan akurat.
 
@@ -32,6 +29,9 @@ Jawablah pertanyaan pengguna dengan ringkas dan informatif.
 
 export const sendMessageToGemini = async (message: string): Promise<string> => {
   try {
+    const apiKey = process.env.API_KEY || '';
+    const ai = new GoogleGenAI({ apiKey });
+
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash',
       contents: message,

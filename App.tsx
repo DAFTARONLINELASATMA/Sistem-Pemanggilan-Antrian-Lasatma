@@ -30,8 +30,8 @@ const App: React.FC = () => {
     const left = window.screen.width - width - 50;
     const top = 100;
     
-    // Gunakan URL saat ini + parameter mode
-    const url = new URL(window.location.href);
+    // Gunakan URL dasar (origin) + parameter mode untuk menghindari error 404 pada routing Vercel
+    const url = new URL(window.location.origin);
     url.searchParams.set('mode', 'CONTROL');
     
     window.open(
@@ -252,7 +252,6 @@ const App: React.FC = () => {
         <span className="text-yellow-400">❖</span>
     </div>
   );
-
 
   if (appMode === 'CONTROL') {
     return <ControlPanel channel={bc} />;
